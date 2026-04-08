@@ -4,7 +4,7 @@ public class ArnoldMain {
 	
 	public static void main(String[] args) {
         
-        double peso = 1.0; // kg
+        double peso = 70.0; 
         
         for(Planeta planeta : Planeta.values()){
             System.out.printf("Your weight on %s is %f N%n", planeta.name(), planeta.pesoSuperficie(peso));
@@ -17,6 +17,11 @@ public class ArnoldMain {
          
         System.out.println("\nYour weight only on the gas giant planets: ");
         for(Planeta planeta: Planeta.getGigantesGaseosos()){
+            System.out.printf("Your weight on %s is %f N%n", planeta.name(), planeta.pesoSuperficie(peso));
+        }
+
+        System.out.println("\nYour weight only on the ice giant planets: ");
+        for(Planeta planeta: Planeta.getGigantesHelados()){
             System.out.printf("Your weight on %s is %f N%n", planeta.name(), planeta.pesoSuperficie(peso));
         }
     }

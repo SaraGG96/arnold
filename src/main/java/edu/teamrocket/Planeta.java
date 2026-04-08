@@ -2,6 +2,7 @@ package edu.teamrocket;
 import java.util.EnumSet;
 
 public enum Planeta {
+
     MERCURY(3.303e+23, 2.4397e+6),
     VENUS(4.869e+24, 6.0518e+6),
     EARTH(5.976e+24, 6.37814e+6),
@@ -45,4 +46,9 @@ public enum Planeta {
     public static EnumSet<Planeta> getGigantesGaseosos() {
         return EnumSet.range(JUPITER, NEPTUNE);
     }
+
+    public static EnumSet<Planeta> getGigantesHelados() {
+        return EnumSet.range(URANUS, NEPTUNE);
+    }
+    
 }
