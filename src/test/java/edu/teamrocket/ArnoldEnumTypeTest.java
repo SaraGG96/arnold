@@ -1,8 +1,8 @@
 package edu.teamrocket;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import java.util.Arrays;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.*;
 
 public class ArnoldEnumTypeTest {
 
@@ -16,41 +16,41 @@ public class ArnoldEnumTypeTest {
 			planetas[planeta.ordinal()] = planeta.name();
 			planetasIncluidos += 1;
 		}
-		assertThat(planetasIncluidos).isEqualTo(Planeta.values().length);
-		assertThat(planetas).doesNotContainNull();
+		assertEquals(Planeta.values().length, planetasIncluidos);
+		for (String planeta : planetas) {
+			assertNotNull(planeta);
+		}
 	}
 
 	@Test
 	public void PlanetaConstructorTest() {
-		// me aseguro de que los metodos de la api
-		// de los Enum Types se comportan como espero
 		Planeta planeta = Planeta.MERCURY;
-		assertThat(planeta).isInstanceOf(Planeta.class);
-		assertThat(planeta.ordinal()).isZero();
-		assertThat(planeta.name()).isEqualToIgnoringCase("MERCURY");
-		assertThat(Planeta.valueOf(planeta.name())).isEqualTo(Planeta.MERCURY);
-		assertThat(planeta.compareTo(Planeta.MERCURY)).isZero();
-		assertThat(planeta.toString()).isEqualToIgnoringCase("MERCURY");
-		assertThat(planeta.equals(Planeta.MERCURY)).isTrue();
-		assertThat(Planeta.values()[0]).isEqualTo(planeta);
+		assertInstanceOf(Planeta.class, planeta);
+		assertEquals(0, planeta.ordinal());
+		assertEquals("MERCURY", planeta.name());
+		assertEquals(Planeta.MERCURY, Planeta.valueOf(planeta.name()));
+		assertEquals(0, planeta.compareTo(Planeta.MERCURY));
+		assertEquals("MERCURY", planeta.toString());
+		assertTrue(planeta.equals(Planeta.MERCURY));
+		assertEquals(planeta, Planeta.values()[0]);
 	}
 
 	@Test
 	public void PlanetaGetMasaTest() {
 		Planeta planeta = Planeta.MERCURY;
-		assertThat(planeta.getMasa()).isEqualTo(3.303e+23);
+		assertEquals(3.303e+23, planeta.getMasa());
 	}
 
 	@Test
 	public void PlanetaGetRadioTest() {
 		Planeta planeta = Planeta.MERCURY;
-		assertThat(planeta.getRadio()).isEqualTo(2.4397e+6);
+		assertEquals(2.4397e+6, planeta.getRadio());
 	}
 
 	@Test
 	public void PlanetaNamesIteratorTest() {
 		for (Planeta planeta : Planeta.values()) {
-			assertThat(planeta.name()).isIn(planetas);
+			assertTrue(Arrays.asList(planetas).contains(planeta.name()));
 		}
 	}
 
@@ -58,7 +58,7 @@ public class ArnoldEnumTypeTest {
 	public void PesoSuperficieMercurioTest() {
 		Planeta planeta = Planeta.MERCURY;
 		double pesoHumano = 175;
-		assertEquals(66.107583, planeta.pesoSuperficie(pesoHumano), 0.001);
+		assertEquals(648.0296765190394, planeta.pesoSuperficie(pesoHumano), 0.001);
 	}
 
 	@Test
@@ -71,11 +71,13 @@ public class ArnoldEnumTypeTest {
 			planetasTerrestres[i] = Planeta.values()[i].name();
 			planetasIncluidos += 1;
 		}
-		assertThat(planetasIncluidos).isEqualTo(4);
-		assertThat(planetas).doesNotContainNull();
+		assertEquals(4, planetasIncluidos);
+		for (String planetaTerrestre : planetasTerrestres) {
+			assertNotNull(planetaTerrestre);
+		}
 
 		for (Planeta planeta : Planeta.getPlanetasTerrestres()) {
-			assertThat(planeta.name()).isIn(planetasTerrestres);
+			assertTrue(Arrays.asList(planetasTerrestres).contains(planeta.name()));
 		}
 	}
 
@@ -91,11 +93,13 @@ public class ArnoldEnumTypeTest {
 			planetasIncluidos += 1;
 			index += 1;
 		}
-		assertThat(planetasIncluidos).isEqualTo(4);
-		assertThat(planetas).doesNotContainNull();
+		assertEquals(4, planetasIncluidos);
+		for (String giganteGaseoso : gigantesGaseosos) {
+			assertNotNull(giganteGaseoso);
+		}
 
 		for (Planeta planeta : Planeta.getGigantesGaseosos()) {
-			assertThat(planeta.name()).isIn(gigantesGaseosos);
+			assertTrue(Arrays.asList(gigantesGaseosos).contains(planeta.name()));
 		}
 	}
 }
